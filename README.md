@@ -1,11 +1,7 @@
-* Build and push Docker
-  * Supports
-    * Github Registry
-    * Docker Hub (TODO)
-    * Google Artifact Registry (TODO)
-* Utilizes docker layer caching with Github Container Registry
-* Creates Github Release on tag push based on semver
+## docker-jinja-reader
+An image that renders an input string from env to a specified file.
 
-# Getting Started
-- [ ] Add `Dockerfile`
-- [ ] (Optional) Update Github Actions event conditions
+## Environment Variables
+All environment variables are avaliable under `env`
+- `RENDER__INPUT`: The jinja2 template content. ex: `<body>{{ env.ENV_1 }}</body>`
+- `RENDER__OUTPUT_FILE`: A file path where the output will be stored. ex: `/usr/src/app/tmp.sh`
