@@ -2,6 +2,7 @@ name: Release
 
 on:
   push:
+  tags:
 
 env:
   REGISTRY: ghcr.io
@@ -26,7 +27,7 @@ jobs:
       uses: actions-ecosystem/action-regex-match@v2
       with:
         text: ${{ github.ref }}
-        regex: ^refs\/heads\/master$
+        regex: ^refs\/tags\/
 
     - name: Setup Environment - Login to Github Container Registry
       uses: docker/login-action@v1
