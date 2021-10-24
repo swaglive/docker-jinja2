@@ -8,6 +8,6 @@ All environment variables are avaliable under `env`
 
 ## Examples
 
-```
-echo Hello {{ env.HOME }} {{ a }} | jinjacli a=Bob > output.txt
+```bash
+echo 'Hello {{ env.HOME }} {{ a }}' | jinjacli a=Bob > output.txt
 ```
