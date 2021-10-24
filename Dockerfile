@@ -1,11 +1,11 @@
-FROM python:3.10.0-alpine3.14
+FROM        python:3.10.0-alpine3.14
 
-COPY requirements.txt requirements.txt
+ENTRYPOINT  ["jinjacli"]
 
-RUN pip install -r requirements.txt
+COPY        requirements.txt requirements.txt
 
-WORKDIR /usr/src/app
+RUN         pip install -r requirements.txt
 
-COPY main.py main.py
+COPY        jinjacli.py /usr/local/bin/jinjacli
 
-CMD ["python3" , "main.py"]
+RUN         chmod +x /usr/local/bin/jinjacli
