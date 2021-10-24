@@ -6,9 +6,10 @@ import click
 
 
 @click.command()
+@click.argument('args', nargs=-1)
 @click.option('--input_file', type=click.File('r'), default=sys.stdin)
 @click.option('--output_file', type=click.File('w'), default=sys.stdout)
-def render(input_file, output_file):
+def render(args, input_file, output_file):
     """
     Construct Template object from env var
     Render to output file
@@ -19,7 +20,9 @@ def render(input_file, output_file):
 
     content = template.render({
         'env': os.environ,
+        **dict(arg.split('=', 1) for arg in args),
     })
+
     with output_file:
         output_file.write(content)
 
