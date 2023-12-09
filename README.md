@@ -1,4 +1,4 @@
-## docker-jinja-reader
+## docker-jinja2
 An image that renders an input string from env to a specified file.
 
 ## Environment Variables

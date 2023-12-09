@@ -1,11 +1,20 @@
-FROM        python:3.10.0-alpine3.14
+ARG         base=python:3.12.1-alpine
 
-ENTRYPOINT  ["jinjacli"]
+###
 
-COPY        requirements.txt requirements.txt
+FROM        ${base}
 
-RUN         pip install -r requirements.txt
+ARG         version=
 
-COPY        jinjacli.py /usr/local/bin/jinjacli
+ENV         PYYAML_FORCE_LIBYAML=1
+ENV         PYYAML_FORCE_CYTHON=1
 
-RUN         chmod +x /usr/local/bin/jinjacli
+ENTRYPOINT  ["jinja2"]
+
+RUN         apk add --no-cache --virtual .build-deps \
+                build-base \
+                yaml-dev && \
+            pip install \
+                jinja2==${version} \
+                jinja2-cli[yaml,toml,xml]==0.8.2 && \
+            apk del .build-deps
