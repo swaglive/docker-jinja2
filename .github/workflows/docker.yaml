@@ -12,6 +12,9 @@ jobs:
       contents: read
       packages: write
 
+    env:
+      PLATFORMS: "linux/amd64,linux/arm64,linux/arm64/v8"
+
     strategy:
       fail-fast: false
       matrix:
@@ -20,9 +23,6 @@ jobs:
         include:
         - version: "3.1.2"
           latest: true
-    
-    env:
-      PLATFORMS: linux/amd64,linux/arm64
 
     steps:
     - name: Checkout
@@ -82,7 +82,7 @@ jobs:
         build-args: |
           version=${{ matrix.version }}
         push: true
-        platforms: ${{ steps.qemu.outputs.platforms }}
+        platforms: ${{ matrix.platforms || env.PLATFORMS || 'linux/amd64' }}
         labels: ${{ steps.meta.outputs.labels }}
         tags: ${{ steps.meta.outputs.tags }}
         cache-from: type=gha
